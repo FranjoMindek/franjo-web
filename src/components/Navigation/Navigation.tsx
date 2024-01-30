@@ -24,22 +24,25 @@ const Navigation = () => {
                onClick={() => setIsOpen(state => !state)}/>
       <div className={
         `${hidden} sticky top-0 left-0 max-lg:w-screen max-lg:h-screen max-lg:fixed `+
-        'max-h-screen flex flex-col justify-between items-center p-8 py-12 basis-[max(326px,25%)] shrink-0 bg-cappuccino'}>
-        {/* Image and headline */}
-        <div className={'flex flex-col items-center gap-4'}>
-          <div className={'bg-placeholder w-48 h-48'}/>
-          <p>Tekst kratki ili potpis</p>
+        'max-h-screen flex flex-col items-center p-8 py-12 basis-[max(326px,25%)] shrink-0 bg-cappuccino'}>
+        <div className={'flex flex-col items-center justify-between flex-grow'}>
+          {/* Image and headline */}
+          {/* TODO: move to about? */}
+          <div className={'max-lg:hidden flex flex-col items-center gap-4'}>
+            <div className={'bg-placeholder w-48 h-48'}/>
+            <p>Tekst kratki ili potpis</p>
+          </div>
+          {/* Nav */}
+          <nav className={'flex-grow flex flex-col justify-center'}>
+            <ul className={'flex flex-col items-center gap-4'}>
+              {navigationRoutes.map(link =>
+                <li key={link.path}>
+                  <Link href={link.path} className={'text-2xl uppercase'}>{link.name}</Link>
+                </li>
+              )}
+            </ul>
+          </nav>
         </div>
-        {/* Nav */}
-        <nav>
-          <ul className={'flex flex-col gap-4 items-center '}>
-            {navigationRoutes.map(link =>
-              <li key={link.path}>
-                <Link href={link.path} className={'text-2xl uppercase'}>{link.name}</Link>
-              </li>
-            )}
-          </ul>
-        </nav>
         {/* Footer */}
         <div className={'flex flex-col gap-4 pt-8'}>
           <SocialMedia/>
