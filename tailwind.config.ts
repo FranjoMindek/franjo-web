@@ -7,9 +7,20 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      white: '#ffffff',
+      cappuccino: '#fdf5ea',
+      coffee: '#422e19',
+      offwhite: '#fffcfa'
+    },
     extend: {
       fontFamily: {
         poppins: ['var(--font-poppins)'],
+      },
+      backgroundImage: {
+        'placeholder': "url('/img/placeholder.png')",
       }
     },
   },

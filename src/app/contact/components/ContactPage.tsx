@@ -1,7 +1,7 @@
 'use client'
 
-import {FormEvent} from "react";
-import {useRouter} from "next/navigation";
+import {FormEvent} from 'react';
+import {useRouter} from 'next/navigation';
 
 const ContactPage = () => {
   const router = useRouter();
@@ -24,16 +24,27 @@ const ContactPage = () => {
   };
 
   return (
-    <div className={'page-container'}>
-      <div className={'responsive-container flex flex-col items-center'}>
-        <div className={'contained-container'}>
-          <form onSubmit={onSubmit}>
-            <input type="text" name="name"/>
-            <input type="email" name="email"/>
-            <input type="body" name="body"/>
-            <button type="submit">Submit</button>
-          </form>
-        </div>
+    <div className={'page-container justify-center'}>
+      <div className={'w-full max-w-prose flex flex-col gap-8 '}>
+        <h1 className={'text-6xl'}>Contact</h1>
+        <p>
+          If you are interested in contacting me, you can use the form below.
+        </p>
+        <form onSubmit={onSubmit} className={'flex flex-col gap-4 w-full'}>
+          <div className={'form-input-container'}>
+            <label htmlFor='name'>Name:</label>
+            <input type='text' id='name' name='name' placeholder='Your name here...'/>
+          </div>
+          <div className={'form-input-container'}>
+            <label htmlFor='email'>Email:</label>
+            <input type='email' id='email' name='email' placeholder='Your email here...'/>
+          </div>
+          <div className={'form-input-container'}>
+            <label htmlFor='message'>Message:</label>
+            <textarea rows={6} id='message' name='message' placeholder='Your message here...'/>
+          </div>
+          <button type='submit'>Submit</button>
+        </form>
       </div>
     </div>
   )

@@ -1,8 +1,6 @@
-import {NextResponse} from "next/server";
 import NodeMailerClient from "@/lib/nodemailer/NodeMailerClient";
 import {z} from "zod";
 import {fromZodError} from "zod-validation-error";
-import {redirect} from "next/navigation";
 
 const sendEmailSchema = z.object({
   name: z
@@ -12,7 +10,7 @@ const sendEmailSchema = z.object({
     .string()
     .email('Please provide a valid email')
     .min(1, 'Email is too short'),
-  body: z
+  message: z
     .string()
     .min(1, 'Body is too short'),
 });
@@ -28,9 +26,9 @@ export async function POST(request: Request) {
 
   const name = res.data.name;
   const email = res.data.email;
-  const body = res.data.body;
+  const message = res.data.message;
 
-  await NodeMailerClient.getInstance().sendMessageAsync(name, email ,body);
+  await NodeMailerClient.getInstance().sendMessageAsync(name, email, message);
 
   return new Response("Ok", {status: 200});
 }

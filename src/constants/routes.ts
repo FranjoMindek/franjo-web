@@ -30,7 +30,8 @@ const routes =  {
   },
 } as const;
 
-export const headerLinks = [
+export const navigationRoutes = [
+  routes.Home,
   routes.About,
   routes.Blog,
   routes.Contact

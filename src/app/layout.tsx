@@ -1,9 +1,7 @@
 import {Poppins} from 'next/font/google'
 import '../styles/globals.scss'
 import {ReactNode} from "react";
-import MainHeader from "@/components/Header/MainHeader";
-import Footer from "@/components/Footer/Footer";
-import SocialMedia from "@/components/SocialMedia/SocialMedia";
+import Navigation from "@/components/Navigation/Navigation";
 
 const poppins = Poppins({
   weight: ['400', '500', '600', '700'],
@@ -25,12 +23,9 @@ export default async function RootLayout({
       {/*  <Analytics/>*/}
       {/*</Suspense>*/}
     {/*</head>*/}
-      <body className={`${poppins.className} min-h-screen w-full`}>
-        <main className={'w-full min-h-screen flex flex-col justify-start items-center'}>
-          <MainHeader/>
-          {children}
-          <Footer/>
-        </main>
+      <body className={`${poppins.className} w-full min-h-screen flex flex-row items-stretch text-coffee`}>
+        <Navigation/>
+        {children}
       </body>
     </html>
   )
