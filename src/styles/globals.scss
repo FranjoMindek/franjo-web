@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'variables';
+
+@layer components {
+  .contained-container {
+    @apply w-full max-w-screen-xl;
+  }
+
+  .responsive-container {
+    @apply w-full px-3 md:px-20 lg:px-32 ;
+  }
+
+  .page-container {
+    @apply w-full flex flex-col items-center flex-grow py-8;
+  }
+}
+
+form {
+  @apply w-full flex flex-col;
+}
