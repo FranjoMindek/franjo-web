@@ -11,9 +11,9 @@ const config: Config = {
       transparent: 'transparent',
       current: 'currentColor',
       white: '#ffffff',
-      cappuccino: '#fdf5ea',
+      cappuccino: '#faf5f0',
       coffee: '#422e19',
-      offwhite: '#fffcfa'
+      offwhite: '#fefcfc'
     },
     extend: {
       fontFamily: {

@@ -43,7 +43,7 @@ const ContactPage = () => {
             <label htmlFor='message'>Message:</label>
             <textarea rows={6} id='message' name='message' placeholder='Your message here...'/>
           </div>
-          <button type='submit'>Submit</button>
+          <button type='submit' className={'ml-2'}>Submit</button>
         </form>
       </div>
     </div>

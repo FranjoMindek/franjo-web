@@ -3,7 +3,7 @@ const HomePage = () => {
     <div className={'page-container justify-center'}>
       <div className={'flex flex-col gap-8'}>
         <p className={'flex flex-col gap-2'}>
-          <span className={'text-6xl'}>Hello,</span>
+          <span className={'text-5xl'}>Hello,</span>
           <span className={'text-4xl'}>my name is Franjo Mindek.</span>
         </p>
         <div className={'flex flex-col gap-2 max-w-prose'}>

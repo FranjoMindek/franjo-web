@@ -1,5 +1,6 @@
 import markdownIt from "markdown-it";
 import highlightjs from "markdown-it-highlightjs";
+import Image from "next/image";
 
 const AboutPage = () => {
   const md = markdownIt().use(highlightjs); // keep this serverside
@@ -9,8 +10,21 @@ const AboutPage = () => {
     <div className={'page-container'}>
       <div className={'flex flex-col max-w-prose'}>
         <h1 className={'text-6xl'}>About</h1>
+        <div>
+          <Image src={'/img/about/myself.jpg'} alt={'Author picture'} width={200} height={400} className={'rounded-xl'}/>
+          <p>
+            My name is Franjo Mindek and I work as a software engineer with soon to be masters degree in computing.
+          </p>
+          <p>
+            I would describe myself as very curious individual with passion for software engineering.
+            Due to that I can be seen always exploring different technologies and learning about software engineering concepts.
+          </p>
+          <p>
+            Besides that in my free time I like to stay in shape by going to the gym, research about current interests or explore good coffee places over Zagreb.
+          </p>
+        </div>
         <div
-          className={'markdown-container'}
+          className={'markdown-container markdown-about'}
           dangerouslySetInnerHTML={{__html: md.render(markdown)}}>
         </div>
       </div>
@@ -29,12 +43,12 @@ Mostly an exploration period for me, trying to find out what interest me from ga
 
 Wrote a Bachelors thesis on topic of Semi-Supervised Learning, after which I decided I wanted to pursue software engineering instead.
 
-### Masters Degree in Computing @ FER, UniZG
+### Master’s Degree in Computing @ FER, UniZG
 *Sep 2022 – Jul 2024 (expected)*
 
 Continuing in software engineering I covered topics such as: Distributed System, Arhitecture and Development of Intelligent Systems, Information Systems.
 
-My Masters thesis has yet be decided. 
+My Master’s thesis has yet be decided. 
 
 ### Sofascore Frontend Academy @ Sofascore
 *Feb 2023 - Jun 2023*
@@ -80,5 +94,4 @@ LLM case study where we wanted to derive a clean architecture template for LLM b
 
 **Languages:** C#
 
-**Technologies:** .NET CORE, Semantic Kernel, Postgres
-`;
+**Technologies:** .NET CORE, Semantic Kernel, Postgres`;

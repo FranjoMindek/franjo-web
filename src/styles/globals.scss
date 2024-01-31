@@ -15,24 +15,28 @@
       @apply ml-2;
     }
   }
+
   .markdown-container {
     a {
       @apply underline;
     }
 
     h2 {
-      @apply text-5xl pt-8;
+      @apply text-5xl mt-9;
     }
 
     h3 {
-      @apply text-2xl pt-6;
-      + *{
-        @apply mb-4;
-      }
+      @apply text-2xl mt-7;
     }
 
     h4 {
-      @apply text-xl pt-2 pb-2;
+      @apply text-xl mt-3;
+    }
+
+    &.markdown-about {
+      h3 + *{
+        @apply mb-3;
+      }
     }
   }
 }
@@ -49,8 +53,4 @@ input, textarea {
   &::placeholder {
     @apply italic text-coffee text-opacity-50;
   }
-}
-
-button {
-  @apply border-2 border-cappuccino rounded-xl py-2 px-4 w-fit;
 }
