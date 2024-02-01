@@ -1,16 +1,18 @@
 import qs from "qs";
-import StrapiResponse from "@/lib/strapi/models/StrapiResponse";
-import {CatalogItemStrapi, toCatalogItem} from "@/lib/strapi/models/CatalogItem";
-import CatalogItem from "@/models/CatalogItem";
+import StrapiResponse, { StrapiCollectionTypeResponse, StrapiSignleTypeResponse } from "@/lib/strapi/models/StrapiResponse";
+import {toAboutPage, toCatalogItem} from "@/lib/strapi/models/StrapiMappers";
+import CatalogItem from "@/models/CatalogItemVM";
+import AboutPage from "@/models/AboutPageVM";
 
 type StrapiHeaders = Record<string, string>;
 
 class StrapiClient {
   private static instance: StrapiClient;
 
-  private readonly _baseUrl: string
-  private readonly _baseHeaders: StrapiHeaders
-  // private readonly _defaultSeoPopulate = ['seo.metaImage', 'seo.metaSocial.image.*']
+  private readonly _baseUrl: string;
+  private readonly _baseHeaders: StrapiHeaders;
+  private readonly _defaultSeoPopulate = ['seo.metaImage', 'seo.metaSocial.image.*'];
+  // private readonly _defaultMarkdownPopulate = 
 
   private constructor() {
     const baseUrl = process.env.STRAPI_API_URL;
@@ -32,7 +34,16 @@ class StrapiClient {
     return StrapiClient.instance;
   }
 
-  private async getAsync<T>(path: string, additionalHeaders?: StrapiHeaders): Promise<StrapiResponse<T>> {
+  // TODO: figure better way to type response
+  private async getSingleAsync<T>(path: string, additionalHeaders?: StrapiHeaders): Promise<StrapiSignleTypeResponse<T>> {
+    return await this._getAsync<T>(path, additionalHeaders) as StrapiSignleTypeResponse<T>;
+  }
+
+  private async getCollectionAsync<T>(path: string, additionalHeaders?: StrapiHeaders): Promise<StrapiCollectionTypeResponse<T>> {
+    return await this._getAsync<T>(path, additionalHeaders) as StrapiCollectionTypeResponse<T>;
+  }
+
+  private async _getAsync<T>(path: string, additionalHeaders?: StrapiHeaders): Promise<StrapiResponse<T>> {
     const url = `${this._baseUrl}/api/${path}`;
     const headers = additionalHeaders
       ? {...this._baseHeaders, ...additionalHeaders}
@@ -96,11 +107,26 @@ class StrapiClient {
       }
     );
 
-    const res = await this.getAsync<CatalogItemStrapi>(`catalog-items?${query}`);
+    const res = await this.getCollectionAsync<CatalogItem>(`catalog-items?${query}`);
 
-    return res.data
-      .map(x => toCatalogItem(x));
+    return res.data.map(x => toCatalogItem(x));
   }
+
+  public async getAboutPageAsync(): Promise<AboutPage> {
+    const query = qs.stringify(
+      {
+        populate: [...this._defaultSeoPopulate],
+      },
+      {
+        encodeValuesOnly: true, // prettify URL
+      }
+    );
+
+    const res = await this.getSingleAsync<AboutPage>(`about-page?${query}`);
+
+    return toAboutPage(res.data);
+  }
+
 }
 
 export default StrapiClient;

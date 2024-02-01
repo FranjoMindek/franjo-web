@@ -1,4 +1,8 @@
-type StrapiResponse<T> = StrapiCollectionTypeResponse<T> /*| StrapiSingleTypeResponse*/;
+import StrapiData from "./StrapiData";
+
+type StrapiResponse<T> = 
+  StrapiCollectionTypeResponse<T> | 
+  StrapiSignleTypeResponse<T>;
 
 export type StrapiCollectionTypeResponse<T> = {
   data: StrapiData<T>[],
@@ -12,14 +16,9 @@ export type StrapiCollectionTypeResponse<T> = {
   }
 };
 
-export type StrapiData<T> = {
-  id: number,
-  attributes: T,
-}
-
-export type StrapiSingleTypeResponse = {
-
-
+export type StrapiSignleTypeResponse<T> = {
+  data: StrapiData<T>,
+  meta: {}
 };
 
 export default StrapiResponse;
