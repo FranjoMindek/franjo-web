@@ -1,8 +1,9 @@
 import qs from "qs";
 import StrapiResponse, { StrapiCollectionTypeResponse, StrapiSignleTypeResponse } from "@/lib/strapi/models/StrapiResponse";
-import {toAboutPage, toCatalogItem} from "@/lib/strapi/models/StrapiMappers";
-import CatalogItem from "@/models/CatalogItemVM";
-import AboutPage from "@/models/AboutPageVM";
+import {toAboutPage, toCatalogItem, toHomePage} from "@/lib/strapi/models/StrapiMappers";
+import CatalogItemVM from "@/models/CatalogItemVM";
+import AboutPageVM from "@/models/AboutPageVM";
+import HomePageVM from "@/models/HomePageVM";
 
 type StrapiHeaders = Record<string, string>;
 
@@ -98,7 +99,7 @@ class StrapiClient {
     return res.json();
   }
 
-  public async getCatalogItemsAsync(): Promise<CatalogItem[]> {
+  public async getCatalogItemsAsync(): Promise<CatalogItemVM[]> {
     const query = qs.stringify(
       {
       },
@@ -107,12 +108,14 @@ class StrapiClient {
       }
     );
 
-    const res = await this.getCollectionAsync<CatalogItem>(`catalog-items?${query}`);
+    const res = await this.getCollectionAsync<CatalogItemVM>(`catalog-items?${query}`);
 
     return res.data.map(x => toCatalogItem(x));
   }
 
-  public async getAboutPageAsync(): Promise<AboutPage> {
+  // PAGES
+
+  public async getAboutPageAsync(): Promise<AboutPageVM> {
     const query = qs.stringify(
       {
         populate: [...this._defaultSeoPopulate],
@@ -122,9 +125,24 @@ class StrapiClient {
       }
     );
 
-    const res = await this.getSingleAsync<AboutPage>(`about-page?${query}`);
+    const res = await this.getSingleAsync<AboutPageVM>(`about-page?${query}`);
 
     return toAboutPage(res.data);
+  }
+
+  public async getHomePageAsync(): Promise<HomePageVM> {
+    const query = qs.stringify(
+      {
+        populate: [...this._defaultSeoPopulate],
+      },
+      {
+        encodeValuesOnly: true, // prettify URL
+      }
+    );
+
+    const res = await this.getSingleAsync<HomePageVM>(`home-page?${query}`);
+
+    return toHomePage(res.data);
   }
 
 }

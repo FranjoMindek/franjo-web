@@ -1,9 +1,10 @@
-import AboutPage from "@/models/AboutPageVM";
-import CatalogItem from "@/models/CatalogItemVM";
+import AboutPageVM from "@/models/AboutPageVM";
+import CatalogItemVM from "@/models/CatalogItemVM";
 import StrapiSeo, { StrapiMetaSocial } from "./StrapiSeo";
 import StrapiImage from "./StrapiImage";
 import { Metadata } from "next";
 import StrapiData, { StrapiAttributes } from "./StrapiData";
+import HomePageVM from "@/models/HomePageVM";
 
 export const toStrapiImage = (data: StrapiData<StrapiImage>): StrapiImage => {
   return {
@@ -27,7 +28,7 @@ export const toMetaSocial = (data: StrapiAttributes<StrapiMetaSocial>): StrapiMe
     socialNetwork: data.socialNetwork,
     title: data.title,
     description: data.description,
-    image: data.image && toStrapiImage(data.image.data),
+    image: data.image?.data && toStrapiImage(data.image.data),
   }
 }
 
@@ -50,7 +51,7 @@ export const toStrapiSeo = (data: StrapiAttributes<StrapiSeo>): StrapiSeo => {
   return {
     metaTitle: data.metaTitle,
     metaDescription: data.metaDescription,
-    metaImage: data.metaImage && toStrapiImage(data.metaImage.data),
+    metaImage: data.metaImage?.data && toStrapiImage(data.metaImage.data),
     metaSocial: data.metaSocial.map(metaSocial => toMetaSocial(metaSocial)),
     keywords: data.keywords,
     metaRobots: data.metaRobots,
@@ -60,7 +61,7 @@ export const toStrapiSeo = (data: StrapiAttributes<StrapiSeo>): StrapiSeo => {
   }
 }
 
-export const toCatalogItem = (data: StrapiData<Omit<CatalogItem, "id">>): CatalogItem => {
+export const toCatalogItem = (data: StrapiData<Omit<CatalogItemVM, "id">>): CatalogItemVM => {
   return {
     id: data.id,
     description: data.attributes.description,
@@ -69,10 +70,16 @@ export const toCatalogItem = (data: StrapiData<Omit<CatalogItem, "id">>): Catalo
   }
 }
 
-export const toAboutPage = (data: StrapiData<AboutPage>): AboutPage => {
+export const toAboutPage = (data: StrapiData<AboutPageVM>): AboutPageVM => {
   return {
-      title: data.attributes.title,
-      content: data.attributes.content,
-      seo: toStrapiSeo(data.attributes.seo),
+    title: data.attributes.title,
+    content: data.attributes.content,
+    seo: toStrapiSeo(data.attributes.seo),
+  }
+}
+
+export const toHomePage = (data: StrapiData<HomePageVM>): HomePageVM => {
+  return {
+    seo: toStrapiSeo(data.attributes.seo),
   }
 }
