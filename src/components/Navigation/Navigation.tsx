@@ -8,6 +8,7 @@ import Image from "next/image";
 import {usePathname} from "next/navigation";
 import MenuOpen from '@img/menu-open.svg';
 import MenuClosed from '@img/menu-closed.svg';
+import Signature from '@img/signature.svg';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,8 +36,7 @@ const Navigation = () => {
         <div className={'flex flex-col items-center justify-between flex-grow'}>
           {/* Headline */}
           <div className={'flex flex-col items-center gap-4'}>
-            <Image src={'/img/placeholder.png'} alt={'Signature'} width={200} height={50}
-                   className={'max-h-14 object-cover'}/>
+            <Signature className={'fill-coffee'} width={213} height={71}/>
             <p>Tekst kratki</p>
           </div>
           {/* Nav */}
