@@ -7,10 +7,9 @@ const AboutPage = async () => {
   const md = markdownIt().use(highlightjs); // keep this serverside
   const data = await fetchData();
 
-  return (
+  return (  
     <div className={'page-container'}>
       <div className={'flex flex-col max-w-prose'}>
-        <h1 className={'text-6xl mb-11'}>{data.title}</h1>
         <div
           className={'markdown-container markdown-about'}
           dangerouslySetInnerHTML={{__html: md.render(data.content)}}>

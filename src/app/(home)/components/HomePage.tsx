@@ -1,29 +1,34 @@
-const HomePage = () => {
+import StrapiClient from "@/lib/strapi/StrapiClient";
+import markdownIt from "markdown-it";
+import highlightjs from "markdown-it-highlightjs";
+import { notFound } from "next/navigation";
+
+const HomePage = async () => {
+  const md = markdownIt().use(highlightjs); // keep this serverside
+  const data = await fetchData();
+
   return (
     <div className={'page-container justify-center'}>
-      <div className={'flex flex-col gap-8'}>
-        <p className={'flex flex-col gap-2'}>
-          <span className={'text-5xl'}>Hello,</span>
-          <span className={'text-4xl'}>my name is Franjo Mindek.</span>
-        </p>
-        <div className={'flex flex-col gap-2 max-w-prose'}>
-          <p>
-            I'm a passionate software engineer with curiosity for just about anything.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto nemo numquam provident reprehenderit sint,
-            veniam? Dicta, doloremque eum ipsam ipsum magni modi omnis quasi quia, recusandae sapiente sint soluta
-            tempore.
-          </p>
-          <p>
-            Aut cupiditate deleniti eligendi esse illum, nulla possimus provident quae quas recusandae
-            sed veniam voluptates. Adipisci beatae deleniti error eveniet harum hic, iste itaque minus molestias quae
-            quaerat sequi sunt.
-          </p>
+      <div className={'flex flex-col max-w-prose gap-2'}>
+        <span className={'text-5xl'}>Hello world,</span>
+        <span className={'text-3xl'}>my name is Franjo Mindek.</span>
+        <div
+          className={'markdown-container markdown-home'}
+          dangerouslySetInnerHTML={{__html: md.render(data.content)}}>
         </div>
       </div>
     </div>
   )
 };
+
+
+const fetchData = async () => {
+  const res = await StrapiClient.getInstance().getHomePageAsync();
+
+  if (!res) notFound();
+
+  return res;
+}
+
 
 export default HomePage;

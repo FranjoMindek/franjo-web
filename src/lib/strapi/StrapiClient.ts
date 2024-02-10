@@ -53,7 +53,8 @@ class StrapiClient {
       url,
       {
         method: "GET",
-        headers
+        headers,
+        cache: "no-cache"
       }
     );
     return res.json();
@@ -133,7 +134,7 @@ class StrapiClient {
   public async getHomePageAsync(): Promise<HomePageVM> {
     const query = qs.stringify(
       {
-        populate: [...this._defaultSeoPopulate],
+        populate: [...this._defaultSeoPopulate, 'content'],
       },
       {
         encodeValuesOnly: true, // prettify URL
@@ -141,6 +142,7 @@ class StrapiClient {
     );
 
     const res = await this.getSingleAsync<HomePageVM>(`home-page?${query}`);
+    console.log(res.data.attributes)
 
     return toHomePage(res.data);
   }

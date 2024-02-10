@@ -30,7 +30,7 @@ const ContactPage = () => {
         <p>
           If you are interested in contacting me, you can use the form below.
         </p>
-        <form onSubmit={onSubmit} className={'flex flex-col gap-4 w-full'}>
+        <form onSubmit={onSubmit} className={'flex flex-col gap-4 w-full items-center'}>
           <div className={'form-input-container'}>
             <label htmlFor='name'>Name:</label>
             <input type='text' id='name' name='name' placeholder='Your name here...'/>
@@ -43,7 +43,7 @@ const ContactPage = () => {
             <label htmlFor='message'>Message:</label>
             <textarea rows={6} id='message' name='message' placeholder='Your message here...'/>
           </div>
-          <button type='submit' className={'ml-2'}>Submit</button>
+          <button type='submit' className={'w-fit p-2 border-2 border-coffee rounded-xl hover:bg-coffee hover:text-offwhite transition-colors'}>Submit</button>
         </form>
       </div>
     </div>

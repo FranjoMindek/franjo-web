@@ -11,7 +11,7 @@ const config: Config = {
       transparent: 'transparent',
       current: 'currentColor',
       white: '#ffffff',
-      cappuccino: '#faf5f0',
+      cappuccino: '#F7F1E8',
       coffee: '#422e19',
       offwhite: '#fefcfc'
     },

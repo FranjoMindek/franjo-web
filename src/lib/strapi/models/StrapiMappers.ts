@@ -81,5 +81,6 @@ export const toAboutPage = (data: StrapiData<AboutPageVM>): AboutPageVM => {
 export const toHomePage = (data: StrapiData<HomePageVM>): HomePageVM => {
   return {
     seo: toStrapiSeo(data.attributes.seo),
+    content: data.attributes.content,
   }
 }

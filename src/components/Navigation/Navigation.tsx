@@ -35,18 +35,17 @@ const Navigation = () => {
         'max-h-screen flex flex-col items-center p-8 py-12 basis-[max(326px,25%)] shrink-0 bg-cappuccino'}>
         <div className={'flex flex-col items-center justify-between flex-grow'}>
           {/* Headline */}
-          <div className={'flex flex-col items-center gap-4'}>
+          <Link className={'flex flex-col items-center'} href={'/'}>
             <Signature className={'fill-coffee'} width={213} height={71}/>
-            <p>Tekst kratki</p>
-          </div>
+          </Link>
           {/* Nav */}
           <nav className={'flex-grow flex flex-col justify-center'}>
             <ul className={'flex flex-col items-center gap-4'}>
               {navigationRoutes.map(link =>
                 <li key={link.path}>
-                  <Link href={link.path} className={'text-2xl uppercase'}
+                  <Link href={link.path} className={`text-2xl uppercase  ${pathname === link.path ? 'font-bold' : 'font-[500]'}`}
                         onClick={(e) => onNavigate(e, link.path)}>
-                    {link.name}
+                    {link.name} 
                   </Link>
                 </li>
               )}
