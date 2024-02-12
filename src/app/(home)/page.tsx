@@ -1,6 +1,6 @@
 import HomePage from "@/app/(home)/components/HomePage";
 import StrapiClient from "@/lib/strapi/StrapiClient";
-import { toMetadata } from "@/lib/strapi/models/StrapiMappers";
+import StrapiMapper from "@/lib/strapi/models/StrapiMapper";
 
 export default function Home() {
   return (
@@ -11,5 +11,5 @@ export default function Home() {
 export async function generateMetadata() {
   const seo = (await StrapiClient.getInstance().getHomePageAsync()).seo;
 
-  return toMetadata(seo);
+  return StrapiMapper.toMetadata(seo);
 }

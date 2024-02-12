@@ -33,27 +33,26 @@ const Navigation = () => {
       <div className={
         `${isOpen || 'max-lg:hidden'} sticky top-0 left-0 max-lg:w-screen max-lg:h-screen max-lg:fixed ` +
         'max-h-screen flex flex-col items-center p-8 py-12 basis-[max(326px,25%)] shrink-0 bg-cappuccino'}>
-        <div className={'flex flex-col items-center justify-between flex-grow'}>
-          {/* Headline */}
-          <Link className={'flex flex-col items-center'} href={'/'}>
-            <Signature className={'fill-coffee'} width={213} height={71}/>
-          </Link>
-          {/* Nav */}
-          <nav className={'flex-grow flex flex-col justify-center'}>
-            <ul className={'flex flex-col items-center gap-4'}>
-              {navigationRoutes.map(link =>
-                <li key={link.path}>
-                  <Link href={link.path} className={`text-2xl uppercase  ${pathname === link.path ? 'font-bold' : 'font-[500]'}`}
-                        onClick={(e) => onNavigate(e, link.path)}>
-                    {link.name} 
-                  </Link>
-                </li>
-              )}
-            </ul>
-          </nav>
-        </div>
+        {/* Headline */}
+        <Link className={'flex flex-col items-center pb-4'} href={'/'}>
+          <Signature className={'fill-coffee'} width={213} height={71}/>
+        </Link>
+        {/* Nav */}
+        <nav className={'flex-grow flex flex-col justify-center'}>
+          <ul className={'flex flex-col items-center gap-5'}>
+            {navigationRoutes.map(link =>
+              <li key={link.path}>
+                <Link href={link.path} className={`text-2xl uppercase group ${pathname === link.path ? 'font-bold' : 'font-[500]'}`}
+                      onClick={(e) => onNavigate(e, link.path)}>
+                  {link.name}
+                  <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-coffee"></span>
+                </Link>
+              </li>
+            )}
+          </ul>
+        </nav>
         {/* Footer */}
-        <div className={'flex flex-col gap-4 pt-8'}>
+        <div className={'flex flex-col gap-4 pt-4'}>
           <SocialMedia/>
           <span className={'text-sm'}>franjo.mindek@gmail.com @ 2024</span>
         </div>

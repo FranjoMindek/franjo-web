@@ -1,9 +1,11 @@
 import qs from "qs";
 import StrapiResponse, { StrapiCollectionTypeResponse, StrapiSignleTypeResponse } from "@/lib/strapi/models/StrapiResponse";
-import {toAboutPage, toCatalogItem, toHomePage} from "@/lib/strapi/models/StrapiMappers";
-import CatalogItemVM from "@/models/CatalogItemVM";
+import StrapiMapper from "@/lib/strapi/models/StrapiMapper";
 import AboutPageVM from "@/models/AboutPageVM";
 import HomePageVM from "@/models/HomePageVM";
+import ContactPageVM from "@/models/ContactPageVM";
+import BlogPageVM from "@/models/BlogPageVM";
+import ApiEndpoints from "@/lib/strapi/api-endpoints";
 
 type StrapiHeaders = Record<string, string>;
 
@@ -13,7 +15,6 @@ class StrapiClient {
   private readonly _baseUrl: string;
   private readonly _baseHeaders: StrapiHeaders;
   private readonly _defaultSeoPopulate = ['seo.metaImage', 'seo.metaSocial.image.*'];
-  // private readonly _defaultMarkdownPopulate = 
 
   private constructor() {
     const baseUrl = process.env.STRAPI_API_URL;
@@ -54,7 +55,6 @@ class StrapiClient {
       {
         method: "GET",
         headers,
-        cache: "no-cache"
       }
     );
     return res.json();
@@ -100,21 +100,35 @@ class StrapiClient {
     return res.json();
   }
 
-  public async getCatalogItemsAsync(): Promise<CatalogItemVM[]> {
+  // public async getCatalogItemsAsync(): Promise<CatalogItemVM[]> {
+  //   const query = qs.stringify(
+  //     {
+  //     },
+  //     {
+  //       encodeValuesOnly: true,
+  //     }
+  //   );
+  //
+  //   const res = await this.getCollectionAsync<CatalogItemVM>(`catalog-items?${query}`);
+  //
+  //   return res.data.map(x => toCatalogItem(x));
+  // }
+
+  // PAGES
+  public async getHomePageAsync(): Promise<HomePageVM> {
     const query = qs.stringify(
       {
+        populate: [...this._defaultSeoPopulate, 'content'],
       },
       {
-        encodeValuesOnly: true,
+        encodeValuesOnly: true, // prettify URL
       }
     );
 
-    const res = await this.getCollectionAsync<CatalogItemVM>(`catalog-items?${query}`);
+    const res = await this.getSingleAsync<HomePageVM>(`${ApiEndpoints.HomePage}?${query}`);
 
-    return res.data.map(x => toCatalogItem(x));
+    return StrapiMapper.toHomePage(res.data);
   }
-
-  // PAGES
 
   public async getAboutPageAsync(): Promise<AboutPageVM> {
     const query = qs.stringify(
@@ -126,27 +140,40 @@ class StrapiClient {
       }
     );
 
-    const res = await this.getSingleAsync<AboutPageVM>(`about-page?${query}`);
+    const res = await this.getSingleAsync<AboutPageVM>(`${ApiEndpoints.AboutPage}?${query}`);
 
-    return toAboutPage(res.data);
+    return StrapiMapper.toAboutPage(res.data);
   }
 
-  public async getHomePageAsync(): Promise<HomePageVM> {
+  public async getBlogPageAsync(): Promise<BlogPageVM> {
     const query = qs.stringify(
       {
-        populate: [...this._defaultSeoPopulate, 'content'],
+        populate: [...this._defaultSeoPopulate],
       },
       {
         encodeValuesOnly: true, // prettify URL
       }
     );
 
-    const res = await this.getSingleAsync<HomePageVM>(`home-page?${query}`);
-    console.log(res.data.attributes)
+    const res = await this.getSingleAsync<BlogPageVM>(`${ApiEndpoints.BlogPage}?${query}`);
 
-    return toHomePage(res.data);
+    return StrapiMapper.toBlogPage(res.data);
   }
 
+  public async getContactPageAsync(): Promise<ContactPageVM> {
+    const query = qs.stringify(
+      {
+        populate: [...this._defaultSeoPopulate],
+      },
+      {
+        encodeValuesOnly: true, // prettify URL
+      }
+    );
+
+    const res = await this.getSingleAsync<ContactPageVM>(`${ApiEndpoints.ContactPage}?${query}`);
+
+    return StrapiMapper.toContactPage(res.data);
+  }
 }
 
 export default StrapiClient;
