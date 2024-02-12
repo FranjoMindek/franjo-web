@@ -12,11 +12,12 @@
   "dependencies": {
     "@types/markdown-it": "^13.0.7",
     "@types/markdown-it-highlightjs": "^3.3.4",
+    "@vercel/speed-insights": "^1.0.9",
     "autoprefixer": "10.4.16",
     "markdown-it": "^14.0.0",
     "markdown-it-highlightjs": "^4.0.1",
     "next": "14.0.4",
-    "nodemailer": "^6.9.8",
+    "nodemailer": "6.9.9",
     "postcss": "8.4.32",
     "qs": "^6.11.2",
     "react": "18.2.0",
