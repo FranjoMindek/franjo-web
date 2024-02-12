@@ -3,7 +3,7 @@
 import {navigationRoutes} from "@/constants/routes";
 import Link from "next/link";
 import SocialMedia from "@/components/SocialMedia/SocialMedia";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Image from "next/image";
 import {usePathname} from "next/navigation";
 import MenuOpen from '@img/menu-open.svg';
@@ -18,9 +18,10 @@ const Navigation = () => {
   const onNavigate = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, path: string) => {
     if (pathname === path) {
       e.preventDefault()
-      onToggle();
+      setIsOpen(false);
     }
   }
+  useEffect(() => setIsOpen(false), [pathname])
 
   return (
     <>
@@ -45,7 +46,7 @@ const Navigation = () => {
                 <Link href={link.path} className={`text-2xl uppercase group ${pathname === link.path ? 'font-bold' : 'font-[500]'}`}
                       onClick={(e) => onNavigate(e, link.path)}>
                   {link.name}
-                  <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-coffee"></span>
+                  <span className="max-lg:hidden block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-coffee"></span>
                 </Link>
               </li>
             )}
