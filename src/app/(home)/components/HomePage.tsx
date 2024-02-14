@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 const HomePage = async () => {
   const md = markdownIt().use(highlightjs); // keep this serverside
   const data = await fetchData();
-  console.log(data)
 
   return (
     <div className={'page-container justify-center'}>

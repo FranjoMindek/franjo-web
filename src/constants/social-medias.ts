@@ -1,5 +1,5 @@
-import Linkedin from '@img/social-medias/linkedin.svg'
-import Github from '@img/social-medias/github.svg'
+import Linkedin from '@img/social-media/linkedin.svg'
+import Github from '@img/social-media/github.svg'
 
 export type SocialMedia = {
   name: string,
@@ -18,7 +18,7 @@ const socialMedias: SocialMedia[] = [
     url: 'https://github.com/FranjoMindek/',
     picture: Github,
   }
-] as const;
+];
 
 export default socialMedias;
 

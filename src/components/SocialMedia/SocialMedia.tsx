@@ -1,5 +1,4 @@
 import socialMedias from "@/constants/social-medias";
-import Image from "next/image";
 import Link from "next/link";
 
 type Props = {

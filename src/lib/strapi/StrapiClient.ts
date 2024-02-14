@@ -1,6 +1,5 @@
 import qs from "qs";
-import StrapiResponse, { StrapiCollectionTypeResponse, StrapiSignleTypeResponse } from "@/lib/strapi/models/StrapiResponse";
-import StrapiMapper from "@/lib/strapi/models/StrapiMapper";
+import StrapiResponse from "@/lib/strapi/models/StrapiResponse";
 import AboutPageVM from "@/models/AboutPageVM";
 import HomePageVM from "@/models/HomePageVM";
 import ContactPageVM from "@/models/ContactPageVM";
@@ -36,16 +35,7 @@ class StrapiClient {
     return StrapiClient.instance;
   }
 
-  // TODO: figure better way to type response
-  private async getSingleAsync<T>(path: string, additionalHeaders?: StrapiHeaders): Promise<StrapiSignleTypeResponse<T>> {
-    return await this._getAsync<T>(path, additionalHeaders) as StrapiSignleTypeResponse<T>;
-  }
-
-  private async getCollectionAsync<T>(path: string, additionalHeaders?: StrapiHeaders): Promise<StrapiCollectionTypeResponse<T>> {
-    return await this._getAsync<T>(path, additionalHeaders) as StrapiCollectionTypeResponse<T>;
-  }
-
-  private async _getAsync<T>(path: string, additionalHeaders?: StrapiHeaders): Promise<StrapiResponse<T>> {
+  private async getAsync<T>(path: string, additionalHeaders?: StrapiHeaders): Promise<StrapiResponse<T>> {
     const url = `${this._baseUrl}/api/${path}`;
     const headers = additionalHeaders
       ? {...this._baseHeaders, ...additionalHeaders}
@@ -57,7 +47,7 @@ class StrapiClient {
         headers,
       }
     );
-    return res.json();
+    return await res.json();
   }
 
   private async postJSONAsync(path: string, body: any, additionalHeaders?: StrapiHeaders) {
@@ -125,9 +115,9 @@ class StrapiClient {
       }
     );
 
-    const res = await this.getSingleAsync<HomePageVM>(`${ApiEndpoints.HomePage}?${query}`);
+    const res = await this.getAsync<HomePageVM>(`${ApiEndpoints.HomePage}?${query}`);
 
-    return StrapiMapper.toHomePage(res.data);
+    return res.data;
   }
 
   public async getAboutPageAsync(): Promise<AboutPageVM> {
@@ -140,9 +130,9 @@ class StrapiClient {
       }
     );
 
-    const res = await this.getSingleAsync<AboutPageVM>(`${ApiEndpoints.AboutPage}?${query}`);
+    const res = await this.getAsync<AboutPageVM>(`${ApiEndpoints.AboutPage}?${query}`);
 
-    return StrapiMapper.toAboutPage(res.data);
+    return res.data;
   }
 
   public async getBlogPageAsync(): Promise<BlogPageVM> {
@@ -155,9 +145,9 @@ class StrapiClient {
       }
     );
 
-    const res = await this.getSingleAsync<BlogPageVM>(`${ApiEndpoints.BlogPage}?${query}`);
+    const res = await this.getAsync<BlogPageVM>(`${ApiEndpoints.BlogPage}?${query}`);
 
-    return StrapiMapper.toBlogPage(res.data);
+    return res.data;
   }
 
   public async getContactPageAsync(): Promise<ContactPageVM> {
@@ -170,9 +160,9 @@ class StrapiClient {
       }
     );
 
-    const res = await this.getSingleAsync<ContactPageVM>(`${ApiEndpoints.ContactPage}?${query}`);
+    const res = await this.getAsync<ContactPageVM>(`${ApiEndpoints.ContactPage}?${query}`);
 
-    return StrapiMapper.toContactPage(res.data);
+    return res.data;
   }
 }
 
