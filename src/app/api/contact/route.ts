@@ -15,7 +15,7 @@ const sendEmailSchema = z.object({
     .min(1, 'Body is too short'),
 });
 
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<Response> {
   const formData = await request.formData();
 
   const res = await sendEmailSchema.safeParseAsync(Object.fromEntries(formData));

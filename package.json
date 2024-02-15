@@ -10,6 +10,7 @@
     "fix-lint": "next lint --fix"
   },
   "dependencies": {
+    "@next/third-parties": "^14.1.0",
     "@types/markdown-it": "^13.0.7",
     "@types/markdown-it-highlightjs": "^3.3.4",
     "@vercel/analytics": "^1.1.3",

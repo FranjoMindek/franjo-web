@@ -2,7 +2,7 @@
 
 import {navigationRoutes} from "@/constants/routes";
 import Link from "next/link";
-import SocialMedia from "@/components/SocialMedia/SocialMedia";
+import SocialMedia from "@/components/SocialMedia";
 import React, {useEffect, useState} from "react";
 import Image from "next/image";
 import {usePathname} from "next/navigation";

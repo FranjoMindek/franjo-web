@@ -19,8 +19,4 @@ export type StrapiMetaSocial = {
   image?: StrapiImage,
 }
 
-interface DateConstructor {
-  ConvertToDateFromTS(msg: string): Date;
-}
-
 export default StrapiSeo;
