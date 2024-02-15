@@ -87,7 +87,7 @@ class StrapiClient {
     const url = `${this._baseUrl}/api/${endpoint}?${query}`;
     const headers = {
       ...this._baseHeaders,
-      ...additionalHeaders
+      ...additionalHeaders,
     };
 
     const res = await fetch(
@@ -95,6 +95,9 @@ class StrapiClient {
       {
         method: "GET",
         headers,
+        next: {
+          revalidate: 60
+        }
       }
     );
     return await res.json();
