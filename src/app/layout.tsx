@@ -18,7 +18,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM!}/>
+      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!}/>
       <body className={`${poppins.className} w-full min-h-[100dvh] flex flex-row items-stretch text-coffee`}>
         <Navigation/>
         {children}
