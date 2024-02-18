@@ -22,7 +22,7 @@ export default async function RootLayout({
         <meta name="google-site-verification" content="ntejZMO3jhEGTh8CNbdQ8piqlXt2n53vxjo6ATyCiyk"/>
       </head>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!}/>
-      <body className={`${poppins.className} w-full min-h-[100dvh] flex flex-row items-stretch text-coffee`}>
+      <body className={`${poppins.className} w-screen min-h-[100dvh] flex flex-row items-stretch text-coffee bg-offwhite text-lg`}>
         <Navigation/>
         {children}
       </body>

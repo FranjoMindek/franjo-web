@@ -33,7 +33,7 @@ const Navigation = () => {
       </button>
       <div className={
         `${isOpen || 'max-lg:hidden'} sticky top-0 left-0 max-lg:w-screen max-lg:h-screen max-lg:fixed ` +
-        'max-h-screen flex flex-col items-center p-8 py-12 basis-[max(326px,25%)] shrink-0 bg-cappuccino'}>
+        'max-h-screen flex flex-col items-center p-8 py-12 basis-[max(310px,25%)] shrink-0 bg-cappuccino'}>
         {/* Headline */}
         <Link className={'flex flex-col items-center pb-4'} href={'/'}>
           <Signature className={'fill-coffee'} width={213} height={71}/>

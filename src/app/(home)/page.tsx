@@ -9,10 +9,12 @@ export default async function Home() {
   const data = await fetchData();
 
   return (
-    <div className={'page-container justify-center'}>
-      <div className={'flex flex-col max-w-prose gap-2'}>
-        <span className={'text-5xl'}>Hello world,</span>
-        <span className={'text-3xl'}>my name is Franjo Mindek.</span>
+    <div className={'page-container'}>
+      <div className={'flex flex-col max-w-prose gap-8'}>
+        <p className={'sm:text-5xl text-4xl flex flex-col gap-2'}>
+          <span>Hello, my name is</span>
+          <span className={'font-semibold'}>Franjo Mindek.</span>
+        </p>
         <div
           className={'markdown-container markdown-home'}
           dangerouslySetInnerHTML={{__html: md.render(data.content)}}>

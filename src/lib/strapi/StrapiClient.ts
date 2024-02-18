@@ -51,7 +51,15 @@ class StrapiClient {
   }
 
   public async getAboutPageAsync(): Promise<AboutPageVM> {
-    const res = await this.getAsync<AboutPageVM>(StrapiEndpoint.AboutPage, this._defaultPageQuery);
+    const query = qs.stringify(
+      {
+        populate: [...this._defaultSeoPopulate, 'educationSections', 'workSections.projects'],
+      },
+      {
+        encodeValuesOnly: true,
+      }
+    );
+    const res = await this.getAsync<AboutPageVM>(StrapiEndpoint.AboutPage, query);
 
     return res.data;
   }
@@ -95,9 +103,7 @@ class StrapiClient {
       {
         method: "GET",
         headers,
-        next: {
-          revalidate: 60
-        }
+        cache: 'no-cache'
       }
     );
     return await res.json();

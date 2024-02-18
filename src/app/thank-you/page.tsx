@@ -2,7 +2,7 @@ import {Metadata} from "next";
 
 export default function ThankYou() {
   return (
-    <div className={'page-container justify-center text-center gap-8'}>
+    <div className={'page-container text-center gap-8'}>
       <p className={'text-3xl md:text-5xl'}>Thank you for contacting!</p>
       <p className={'text-xl md:text-3xl'}>I&apos;ll try to respond in short notice.</p>
     </div>
