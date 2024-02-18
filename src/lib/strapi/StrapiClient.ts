@@ -103,7 +103,9 @@ class StrapiClient {
       {
         method: "GET",
         headers,
-        cache: 'no-cache'
+        next: {
+          revalidate: 120,
+        }
       }
     );
     return await res.json();

@@ -9,7 +9,6 @@ import WorkSection from "@/app/about/WorkSection";
 export default async function About() {
   const md = markdownIt().use(highlightjs); // keep this serverside
   const data = await fetchData();
-  console.log(data)
 
   return (
     <div className={'page-container'}>
