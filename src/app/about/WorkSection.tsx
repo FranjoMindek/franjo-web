@@ -15,7 +15,7 @@ export default function WorkSection({workSection}: Props) {
         <h3 className={'sm:text-4xl text-3xl font-semibold'}>{workSection.position}</h3>
         <div className={'flex flex-col sm:flex-row justify-between'}>
           <span className={'sm:text-2xl text-xl font-semibold'}>At {workSection.company}</span>
-          <span className={'sm:text-2xl text-lg italic'}>{workSection.startDate} - {workSection.endDate}</span>
+          <span className={'sm:text-xl text-lg italic'}>{workSection.startDate} - {workSection.endDate}</span>
         </div>
       </div>
       {workSection.projects.length && workSection.projects.map(project => (

@@ -15,7 +15,7 @@ export default function EducationSection({educationSection}: Props) {
         <h3 className={'sm:text-4xl text-3xl font-semibold'}>{educationSection.certificate}</h3>
         <div className={'flex flex-col sm:flex-row justify-between'}>
           <span className={'sm:text-2xl text-xl font-semibold'}>At {educationSection.institution}</span>
-          <span className={'sm:text-2xl text-lg italic'}>{educationSection.startDate} - {educationSection.endDate}</span>
+          <span className={'sm:text-xl text-lg italic'}>{educationSection.startDate} - {educationSection.endDate}</span>
         </div>
       </div>
       <div
