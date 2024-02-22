@@ -12,7 +12,7 @@ export default async function Home() {
     <div className={'page-container'}>
       <div className={'flex flex-col max-w-prose gap-8'}>
         <p className={'sm:text-5xl text-4xl flex flex-col gap-2'}>
-          <p className={'font-semibold sm:text-6xl text-5xl'}>Hello,</p>
+          <span className={'font-semibold sm:text-6xl text-5xl'}>Hello,</span>
           <span>my name is <span className={'font-semibold'}>Franjo Mindek.</span></span>
         </p>
         <div
