@@ -12,8 +12,8 @@ export default async function Home() {
     <div className={'page-container'}>
       <div className={'flex flex-col max-w-prose gap-8'}>
         <p className={'sm:text-5xl text-4xl flex flex-col gap-2'}>
-          <span>Hello, my name is</span>
-          <span className={'font-semibold'}>Franjo Mindek.</span>
+          <p className={'font-semibold sm:text-6xl text-5xl'}>Hello,</p>
+          <span>my name is <span className={'font-semibold'}>Franjo Mindek.</span></span>
         </p>
         <div
           className={'markdown-container markdown-home'}

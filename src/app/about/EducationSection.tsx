@@ -10,7 +10,7 @@ export default function EducationSection({educationSection}: Props) {
   const md = markdownIt().use(highlightjs); // keep this serverside
 
   return (
-    <div className={'flex flex-col gap-4 sm:gap-6 mt-8 sm:mt-12'}>
+    <div className={'flex flex-col gap-4 sm:gap-6 mt-8'}>
       <div className={'flex flex-col gap-1'}>
         <h3 className={'sm:text-4xl text-3xl font-semibold'}>{educationSection.certificate}</h3>
         <div className={'flex flex-col sm:flex-row justify-between'}>

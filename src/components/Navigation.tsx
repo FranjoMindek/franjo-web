@@ -25,7 +25,7 @@ const Navigation = () => {
 
   return (
     <>
-      <button className={'lg:hidden fixed top-4 right-4 z-10 fill-coffee'} onClick={onToggle}>
+      <button className={'lg:hidden fixed top-4 right-4 z-10 fill-coffee'} aria-label="Menu button" onClick={onToggle}>
         {isOpen
           ? <MenuOpen/>
           : <MenuClosed/>
@@ -35,7 +35,7 @@ const Navigation = () => {
         `${isOpen || 'max-lg:hidden'} sticky top-0 left-0 max-lg:w-screen max-lg:h-screen max-lg:fixed ` +
         'max-h-screen flex flex-col items-center p-8 py-12 basis-[max(310px,25%)] shrink-0 bg-cappuccino'}>
         {/* Headline */}
-        <Link className={'flex flex-col items-center pb-4'} href={'/'}>
+        <Link className={'flex flex-col items-center pb-4'} href={'/'} aria-label={'Navigate to home'}>
           <Signature className={'fill-coffee'} width={213} height={71}/>
         </Link>
         {/* Nav */}
@@ -43,7 +43,7 @@ const Navigation = () => {
           <ul className={'flex flex-col items-center gap-5'}>
             {navigationRoutes.map(link =>
               <li key={link.path}>
-                <Link href={link.path} className={`text-2xl uppercase group ${pathname === link.path ? 'font-bold' : 'font-[500]'}`}
+                <Link href={link.path} className={`text-3xl uppercase group ${pathname === link.path ? 'font-bold' : 'font-[500]'}`}
                       onClick={(e) => onNavigate(e, link.path)}>
                   {link.name}
                   <span className="max-lg:hidden block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-coffee"></span>
