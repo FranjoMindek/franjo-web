@@ -12,27 +12,27 @@ export default async function About() {
 
   return (
     <div className={'page-container'}>
-      <div className={'flex flex-col gap-14 max-w-prose'}>
+      <div className={'flex flex-col gap-16 sm:gap-20 max-w-prose'}>
         {/* About */}
         <div>
-          <h1 className={'sm:text-6xl text-5xl font-bold mb-8'}>About</h1>
+          <h1 className={'sm:text-6xl text-5xl font-bold mb-12 sm:mb-16'}>About</h1>
           <div
             className={'markdown-container'}
             dangerouslySetInnerHTML={{__html: md.render(data.introduction)}}>
           </div>
         </div>
-        {/* Education */}
-        <div>
-          <h2 className={'sm:text-5xl text-4xl font-bold pb-2 border-b-4 mb-8'}>Education</h2>
-          {data.educationSections.length && data.educationSections.map(education => (
-            <EducationSection educationSection={education} key={education.certificate}/>
-          ))}
-        </div>
         {/* Work */}
         <div>
-          <h2 className={'sm:text-5xl text-4xl font-bold pb-2 border-b-4 mb-8'}>Work</h2>
+          <h2 className={'sm:text-5xl text-4xl font-bold pb-2 border-b-4 mb-12 sm:mb-14'}>Work</h2>
           {data.workSections.length && data.workSections.map(work => (
             <WorkSection workSection={work} key={work.company}/>
+          ))}
+        </div>
+        {/* Education */}
+        <div>
+          <h2 className={'sm:text-5xl text-4xl font-bold pb-2 border-b-4 mb-12 sm:mb-14'}>Education</h2>
+          {data.educationSections.length && data.educationSections.map(education => (
+            <EducationSection educationSection={education} key={education.certificate}/>
           ))}
         </div>
       </div>

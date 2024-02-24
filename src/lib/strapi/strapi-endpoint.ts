@@ -1,4 +1,6 @@
 const enum StrapiEndpoint {
+  // Content
+  BlogPosts = 'blog-posts',
   // Pages
   HomePage = 'home-page',
   AboutPage = 'about-page',

@@ -1,5 +1,13 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'res.cloudinary.com',
+            }
+        ]
+    },
     reactStrictMode: true,
     webpack(config) {
         // Grab the existing rule that handles SVG imports

@@ -10,13 +10,13 @@ export default async function Home() {
 
   return (
     <div className={'page-container'}>
-      <div className={'flex flex-col max-w-prose gap-8'}>
-        <p className={'sm:text-5xl text-4xl flex flex-col gap-2'}>
-          <span className={'font-semibold sm:text-6xl text-5xl'}>Hello,</span>
+      <div className={'flex flex-col max-w-prose gap-6 sm:gap-8'}>
+        <p className={'sm:text-4xl text-3xl flex flex-col'}>
+          <span className={'font-semibold sm:text-5xl text-4xl'}>Hello,</span>
           <span>my name is <span className={'font-semibold'}>Franjo Mindek.</span></span>
         </p>
         <div
-          className={'markdown-container markdown-home'}
+          className={'markdown-container'}
           dangerouslySetInnerHTML={{__html: md.render(data.content)}}>
         </div>
       </div>

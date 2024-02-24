@@ -1,3 +1,5 @@
+"use server"
+
 import qs from "qs";
 import StrapiResponse from "@/lib/strapi/models/StrapiResponse";
 import AboutPageVM from "@/models/AboutPageVM";
@@ -5,6 +7,8 @@ import HomePageVM from "@/models/HomePageVM";
 import ContactPageVM from "@/models/ContactPageVM";
 import BlogPageVM from "@/models/BlogPageVM";
 import StrapiEndpoint from "@/lib/strapi/strapi-endpoint";
+import BlogPostPreviewVM from "@/models/BlogPostPreviewVM";
+import BlogPostVM from "@/models/BlogPostVM";
 
 type StrapiHeaders = Record<string, string>;
 
@@ -43,6 +47,68 @@ class StrapiClient {
     return StrapiClient.instance;
   }
 
+  /*** CONTENT ***/
+  public async getBlogPostPreviewsAsync(): Promise<BlogPostPreviewVM[]> {
+    const query = qs.stringify(
+      {
+        populate: ['cover.*'],
+        filter: ['id', 'slug', 'title', 'description'],
+        sort: ['published:desc'],
+      },
+      {
+        encodeValuesOnly: true,
+      }
+    );
+
+    const res = await this.getAsync<BlogPostPreviewVM[]>(
+      StrapiEndpoint.BlogPosts,
+      query
+    );
+
+    return res.data;
+  }
+
+  public async getBlogPostAsync(slug: string): Promise<BlogPostVM | undefined> {
+    const query = qs.stringify(
+      {
+        populate: [...this._defaultSeoPopulate, 'cover.*'],
+        filters: {
+          slug: {
+            $eq: slug,
+          }
+        }
+      },
+      {
+        encodeValuesOnly: true,
+      }
+    );
+
+    const res = await this.getAsync<BlogPostVM[]>(
+      StrapiEndpoint.BlogPosts,
+      query
+    );
+
+    return res.data.at(0);
+  }
+
+  public async getBlogPostSlugsAsync(): Promise<string[]> {
+    const query = qs.stringify(
+      {
+        fields: ['slug']
+      },
+      {
+        encodeValuesOnly: true,
+      }
+    );
+
+    const res = await this.getAsync<{slug: string, id: number}[]>(
+      StrapiEndpoint.BlogPosts,
+      query
+    );
+
+    return res.data.map(x => x.slug);
+  }
+
   /*** PAGES ***/
   public async getHomePageAsync(): Promise<HomePageVM> {
     const res = await this.getAsync<HomePageVM>(StrapiEndpoint.HomePage, this._defaultPageQuery);
@@ -76,7 +142,7 @@ class StrapiClient {
     return res.data;
   }
 
-  /*** Other ***/
+  /*** OTHER ***/
   public async getSitemap(): Promise<string> {
     const url = `${this._baseUrl}/api/${StrapiEndpoint.Sitemap}`;
     const headers = this._baseHeaders

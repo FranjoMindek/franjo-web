@@ -10,8 +10,8 @@ export default function EducationSection({educationSection}: Props) {
   const md = markdownIt().use(highlightjs); // keep this serverside
 
   return (
-    <div className={'flex flex-col gap-4 sm:gap-6 mt-8'}>
-      <div className={'flex flex-col gap-1'}>
+    <div className={'flex flex-col mt-12 sm:mt-14 gap-6 sm:gap-8'}>
+      <div>
         <h3 className={'sm:text-4xl text-3xl font-semibold'}>{educationSection.certificate}</h3>
         <div className={'flex flex-col sm:flex-row justify-between'}>
           <span className={'sm:text-2xl text-xl font-semibold'}>At {educationSection.institution}</span>
@@ -19,7 +19,7 @@ export default function EducationSection({educationSection}: Props) {
         </div>
       </div>
       <div
-        className={'markdown-container markdown-about'}
+        className={'markdown-container'}
         dangerouslySetInnerHTML={{__html: md.render(educationSection.description)}}>
       </div>
     </div>

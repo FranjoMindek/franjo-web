@@ -40,13 +40,13 @@ const Navigation = () => {
         </Link>
         {/* Nav */}
         <nav className={'flex-grow flex flex-col justify-center'}>
-          <ul className={'flex flex-col items-center gap-5'}>
+          <ul className={'flex flex-col items-center gap-6'}>
             {navigationRoutes.map(link =>
               <li key={link.path}>
                 <Link href={link.path} className={`text-3xl uppercase group ${pathname === link.path ? 'font-bold' : 'font-[500]'}`}
                       onClick={(e) => onNavigate(e, link.path)}>
                   {link.name}
-                  <span className="max-lg:hidden block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-coffee"></span>
+                  <span className="max-lg:hidden block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-coffee"></span>
                 </Link>
               </li>
             )}
