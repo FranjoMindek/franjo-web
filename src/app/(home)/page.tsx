@@ -3,6 +3,8 @@ import StrapiMapper from '@/lib/strapi/models/StrapiMapper';
 import markdownIt from 'markdown-it';
 import highlightjs from 'markdown-it-highlightjs';
 import { notFound } from 'next/navigation';
+import AboutPageVM from '@/models/AboutPageVM';
+import HomePageVM from '@/models/HomePageVM';
 
 export default async function Home() {
   const md = markdownIt().use(highlightjs); // keep this serverside
@@ -26,12 +28,12 @@ export default async function Home() {
   );
 }
 
-const fetchData = async () => {
+async function fetchData(): Promise<HomePageVM> {
   const res = await StrapiClient.getInstance().getHomePageAsync();
   if (!res) notFound();
 
   return res;
-};
+}
 
 export async function generateMetadata() {
   const seo = (await StrapiClient.getInstance().getHomePageAsync()).seo;

@@ -3,6 +3,8 @@ import StrapiMapper from '@/lib/strapi/models/StrapiMapper';
 import { notFound } from 'next/navigation';
 import BlogPostPreview from '@/app/blog/BlogPostPreview';
 import BlogPostHeadline from '@/app/blog/BlogPostHeadline';
+import AboutPageVM from '@/models/AboutPageVM';
+import BlogPostPreviewVM from '@/models/BlogPostPreviewVM';
 
 export default async function Blog() {
   const data = await fetchData();
@@ -25,7 +27,7 @@ export default async function Blog() {
   );
 }
 
-async function fetchData() {
+async function fetchData(): Promise<BlogPostPreviewVM[]> {
   const res = await StrapiClient.getInstance().getBlogPostPreviewsAsync();
   if (!res) notFound();
 
