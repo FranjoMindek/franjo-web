@@ -1,43 +1,54 @@
-import StrapiClient from "@/lib/strapi/StrapiClient";
-import StrapiMapper from "@/lib/strapi/models/StrapiMapper";
-import markdownIt from "markdown-it";
-import highlightjs from "markdown-it-highlightjs";
-import {notFound} from "next/navigation";
-import EducationSection from "@/app/about/EducationSection";
-import WorkSection from "@/app/about/WorkSection";
+import StrapiClient from '@/lib/strapi/StrapiClient';
+import StrapiMapper from '@/lib/strapi/models/StrapiMapper';
+import markdownIt from 'markdown-it';
+import highlightjs from 'markdown-it-highlightjs';
+import { notFound } from 'next/navigation';
+import EducationSection from '@/app/about/EducationSection';
+import WorkSection from '@/app/about/WorkSection';
 
 export default async function About() {
   const md = markdownIt().use(highlightjs); // keep this serverside
   const data = await fetchData();
 
   return (
-    <div className={'page-container'}>
-      <div className={'flex flex-col gap-16 sm:gap-20 max-w-prose'}>
+    <div className='page-container'>
+      <div className='flex max-w-prose flex-col gap-16 sm:gap-20'>
         {/* About */}
         <div>
-          <h1 className={'sm:text-6xl text-5xl font-bold mb-12 sm:mb-16'}>About</h1>
+          <h1 className='mb-12 text-5xl font-bold sm:mb-16 sm:text-6xl'>
+            About
+          </h1>
           <div
-            className={'markdown-container'}
-            dangerouslySetInnerHTML={{__html: md.render(data.introduction)}}>
-          </div>
+            className='markdown-container'
+            dangerouslySetInnerHTML={{ __html: md.render(data.introduction) }}
+          ></div>
         </div>
         {/* Work */}
         <div>
-          <h2 className={'sm:text-5xl text-4xl font-bold pb-2 border-b-4 mb-12 sm:mb-14'}>Work</h2>
-          {data.workSections.length && data.workSections.map(work => (
-            <WorkSection workSection={work} key={work.company}/>
-          ))}
+          <h2 className='mb-12 border-b-4 pb-2 text-4xl font-bold sm:mb-14 sm:text-5xl'>
+            Work
+          </h2>
+          {data.workSections.length &&
+            data.workSections.map(work => (
+              <WorkSection workSection={work} key={work.company} />
+            ))}
         </div>
         {/* Education */}
         <div>
-          <h2 className={'sm:text-5xl text-4xl font-bold pb-2 border-b-4 mb-12 sm:mb-14'}>Education</h2>
-          {data.educationSections.length && data.educationSections.map(education => (
-            <EducationSection educationSection={education} key={education.certificate}/>
-          ))}
+          <h2 className='mb-12 border-b-4 pb-2 text-4xl font-bold sm:mb-14 sm:text-5xl'>
+            Education
+          </h2>
+          {data.educationSections.length &&
+            data.educationSections.map(education => (
+              <EducationSection
+                educationSection={education}
+                key={education.certificate}
+              />
+            ))}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 const fetchData = async () => {
@@ -46,7 +57,7 @@ const fetchData = async () => {
   if (!res) notFound();
 
   return res;
-}
+};
 
 export async function generateMetadata() {
   const seo = (await StrapiClient.getInstance().getAboutPageAsync()).seo;

@@ -1,32 +1,32 @@
 export type Route = {
-  name: string,
-  path: string,
-}
+  name: string;
+  path: string;
+};
 
-const routes =  {
+const routes = {
   Home: {
-    name: "Home",
-    path: "/"
+    name: 'Home',
+    path: '/',
   },
   Blog: {
-    name: "Blog",
-    path: "/blog",
+    name: 'Blog',
+    path: '/blog',
   },
   About: {
-    name: "About",
-    path: "/about",
+    name: 'About',
+    path: '/about',
   },
   Contact: {
-    name: "Contact",
-    path: "/contact",
+    name: 'Contact',
+    path: '/contact',
   },
   CookiePolicy: {
-    name: "Cookie Policy",
-    path: "/cookie-policy",
+    name: 'Cookie Policy',
+    path: '/cookie-policy',
   },
   PrivacyPolicy: {
-    name: "Privacy Policy",
-    path: "/privacy-policy",
+    name: 'Privacy Policy',
+    path: '/privacy-policy',
   },
 } as const;
 
@@ -34,7 +34,7 @@ export const navigationRoutes = [
   routes.Home,
   routes.About,
   routes.Blog,
-  routes.Contact
-]
+  routes.Contact,
+];
 
 export default routes;

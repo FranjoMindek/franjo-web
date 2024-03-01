@@ -6,19 +6,19 @@
  * @type {import('svgo').Config}
  */
 module.exports = {
-    plugins: [
-        {
-            name: 'preset-default',
-            params: {
-                overrides: {
-                    // Removing viewBox attribute causes CSS scaling to break.
-                    // See https://github.com/svg/svgo/blob/main/README.md#svg-wont-scale-when-css-is-applied-on-it
-                    removeViewBox: false,
-                },
-            },
+  plugins: [
+    {
+      name: 'preset-default',
+      params: {
+        overrides: {
+          // Removing viewBox attribute causes CSS scaling to break.
+          // See https://github.com/svg/svgo/blob/main/README.md#svg-wont-scale-when-css-is-applied-on-it
+          removeViewBox: false,
         },
-        // This makes sure that IDs inside SVG files don't collide with one another so that styles
-        // applied to one don't leak into others.
-        'prefixIds',
-    ],
+      },
+    },
+    // This makes sure that IDs inside SVG files don't collide with one another so that styles
+    // applied to one don't leak into others.
+    'prefixIds',
+  ],
 };

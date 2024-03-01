@@ -1,5 +1,5 @@
-import nodemailer, {Transporter} from 'nodemailer';
-import SMTPTransport from "nodemailer/lib/smtp-transport";
+import nodemailer, { Transporter } from 'nodemailer';
+import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
 export default class NodeMailerClient {
   private static instance: NodeMailerClient;
@@ -9,23 +9,21 @@ export default class NodeMailerClient {
 
   private constructor() {
     const gmailEmail = process.env.GMAIL_EMAIL;
-    if (!gmailEmail) throw new Error("Gmail Email is undefined!");
+    if (!gmailEmail) throw new Error('Gmail Email is undefined!');
     const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
-    if (!gmailAppPassword) throw new Error("Gmail Password is undefined!");
+    if (!gmailAppPassword) throw new Error('Gmail Password is undefined!');
 
     this._email = gmailEmail;
-    this._transporter = nodemailer.createTransport(
-      {
-        service: 'gmail',
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        auth:{
-          user: gmailEmail,
-          pass: gmailAppPassword,
-        }
-      }
-    );
+    this._transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: gmailEmail,
+        pass: gmailAppPassword,
+      },
+    });
   }
 
   public static getInstance(): NodeMailerClient {
@@ -47,7 +45,7 @@ export default class NodeMailerClient {
       from: this._email,
       to: this._email,
       subject: `[FWEB] Contact by ${email}`,
-      text
+      text,
     };
 
     try {

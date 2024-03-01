@@ -1,43 +1,46 @@
-import StrapiClient from "@/lib/strapi/StrapiClient";
-import StrapiMapper from "@/lib/strapi/models/StrapiMapper";
-import {notFound} from "next/navigation";
-import markdownIt from "markdown-it";
-import highlightjs from "markdown-it-highlightjs";
-import Image from "next/image";
-import {toLocalDate} from "@/utils/date-utils";
+import StrapiClient from '@/lib/strapi/StrapiClient';
+import StrapiMapper from '@/lib/strapi/models/StrapiMapper';
+import { notFound } from 'next/navigation';
+import markdownIt from 'markdown-it';
+import highlightjs from 'markdown-it-highlightjs';
+import Image from 'next/image';
+import { toLocalDate } from '@/utils/date-utils';
 
 type Props = {
   params: {
-    slug: string
-  },
-}
+    slug: string;
+  };
+};
 
 export default async function BlogPost({ params }: Props) {
   const md = markdownIt().use(highlightjs); // keep this serverside
   const data = await fetchData(params.slug);
 
   return (
-    <div className={'page-container justify-start'}>
-      <div className={'w-full max-w-prose flex flex-col'}>
-        <h1 className={'text-5xl sm:text-6xl font-bold mb-12 sm:mb-16'}>{data.title}</h1>
+    <div className='page-container justify-start'>
+      <div className='flex w-full max-w-prose flex-col'>
+        <h1 className='mb-12 text-5xl font-bold sm:mb-16 sm:text-6xl'>
+          {data.title}
+        </h1>
         <p>{data.description}</p>
         <Image
           width={data.cover.width}
           height={data.cover.height}
           src={data.cover.url}
           alt={data.cover.alternativeText ?? 'Blog post cover'}
-          className={'w-full h-auto object-cover aspect-video mt-8 mb-4'}/>
-        <div className={'flex flex-row justify-between  mb-8'}>
+          className='mb-4 mt-8 aspect-video h-auto w-full object-cover'
+        />
+        <div className='mb-8 flex flex-row  justify-between'>
           <span>Franjo Mindek</span>
           <span>{toLocalDate(data.published)}</span>
         </div>
         <div
-          className={'markdown-container'}
-          dangerouslySetInnerHTML={{__html: md.render(data.content)}}>
-        </div>
+          className='markdown-container'
+          dangerouslySetInnerHTML={{ __html: md.render(data.content) }}
+        ></div>
       </div>
     </div>
-  )
+  );
 }
 
 async function fetchData(slug: string) {
@@ -52,11 +55,12 @@ export async function generateStaticParams() {
 
   return res.map(slug => ({
     slug: slug,
-  }))
+  }));
 }
 
 export async function generateMetadata({ params }: Props) {
-  const seo = (await StrapiClient.getInstance().getBlogPostAsync(params.slug))!.seo;
+  const seo = (await StrapiClient.getInstance().getBlogPostAsync(params.slug))!
+    .seo;
 
   return StrapiMapper.toMetadata(seo);
 }

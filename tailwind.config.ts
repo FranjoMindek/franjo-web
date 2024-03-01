@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
@@ -13,17 +13,17 @@ const config: Config = {
       white: '#ffffff',
       cappuccino: '#F7F1E8',
       coffee: '#422e19',
-      offwhite: '#fefcfc'
+      offwhite: '#fefcfc',
     },
     extend: {
       fontFamily: {
-        poppins: ['var(--font-poppins)'],
+        openSans: ['var(--font-open-sans)'],
       },
       backgroundImage: {
-        'placeholder': "url('/img/placeholder.png')",
-      }
+        placeholder: "url('/img/placeholder.png')",
+      },
     },
   },
   plugins: [],
-}
-export default config
+};
+export default config;

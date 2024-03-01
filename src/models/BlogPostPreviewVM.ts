@@ -1,11 +1,11 @@
-import StrapiImage from "@/lib/strapi/models/StrapiImage";
+import StrapiImage from '@/lib/strapi/models/StrapiImage';
 
 type BlogPostPreviewVM = {
-  id: number,
-  slug: string,
-  title: string,
-  description: string,
-  cover: StrapiImage,
-}
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  cover: StrapiImage;
+};
 
 export default BlogPostPreviewVM;

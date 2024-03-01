@@ -1,14 +1,14 @@
-"use server"
+'use server';
 
-import qs from "qs";
-import StrapiResponse from "@/lib/strapi/models/StrapiResponse";
-import AboutPageVM from "@/models/AboutPageVM";
-import HomePageVM from "@/models/HomePageVM";
-import ContactPageVM from "@/models/ContactPageVM";
-import BlogPageVM from "@/models/BlogPageVM";
-import StrapiEndpoint from "@/lib/strapi/strapi-endpoint";
-import BlogPostPreviewVM from "@/models/BlogPostPreviewVM";
-import BlogPostVM from "@/models/BlogPostVM";
+import qs from 'qs';
+import StrapiResponse from '@/lib/strapi/models/StrapiResponse';
+import AboutPageVM from '@/models/AboutPageVM';
+import HomePageVM from '@/models/HomePageVM';
+import ContactPageVM from '@/models/ContactPageVM';
+import BlogPageVM from '@/models/BlogPageVM';
+import StrapiEndpoint from '@/lib/strapi/strapi-endpoint';
+import BlogPostPreviewVM from '@/models/BlogPostPreviewVM';
+import BlogPostVM from '@/models/BlogPostVM';
 
 type StrapiHeaders = Record<string, string>;
 
@@ -17,7 +17,10 @@ class StrapiClient {
 
   private readonly _baseUrl: string;
   private readonly _baseHeaders: StrapiHeaders;
-  private readonly _defaultSeoPopulate = ['seo.metaImage', 'seo.metaSocial.image.*'];
+  private readonly _defaultSeoPopulate = [
+    'seo.metaImage',
+    'seo.metaSocial.image.*',
+  ];
   private readonly _defaultPageQuery = qs.stringify(
     {
       populate: [...this._defaultSeoPopulate],
@@ -29,13 +32,13 @@ class StrapiClient {
 
   private constructor() {
     const baseUrl = process.env.STRAPI_API_URL;
-    if (!baseUrl) throw new Error("Strapi API URL is undefined!");
+    if (!baseUrl) throw new Error('Strapi API URL is undefined!');
     const apiToken = process.env.STRAPI_API_TOKEN;
-    if (!apiToken) throw new Error("Strapi API token is undefined!");
+    if (!apiToken) throw new Error('Strapi API token is undefined!');
 
     this._baseUrl = baseUrl;
     this._baseHeaders = {
-      'Authorization': `Bearer ${apiToken}`,
+      Authorization: `Bearer ${apiToken}`,
     };
   }
 
@@ -75,8 +78,8 @@ class StrapiClient {
         filters: {
           slug: {
             $eq: slug,
-          }
-        }
+          },
+        },
       },
       {
         encodeValuesOnly: true,
@@ -94,14 +97,14 @@ class StrapiClient {
   public async getBlogPostSlugsAsync(): Promise<string[]> {
     const query = qs.stringify(
       {
-        fields: ['slug']
+        fields: ['slug'],
       },
       {
         encodeValuesOnly: true,
       }
     );
 
-    const res = await this.getAsync<{slug: string, id: number}[]>(
+    const res = await this.getAsync<{ slug: string; id: number }[]>(
       StrapiEndpoint.BlogPosts,
       query
     );
@@ -111,7 +114,10 @@ class StrapiClient {
 
   /*** PAGES ***/
   public async getHomePageAsync(): Promise<HomePageVM> {
-    const res = await this.getAsync<HomePageVM>(StrapiEndpoint.HomePage, this._defaultPageQuery);
+    const res = await this.getAsync<HomePageVM>(
+      StrapiEndpoint.HomePage,
+      this._defaultPageQuery
+    );
 
     return res.data;
   }
@@ -119,25 +125,38 @@ class StrapiClient {
   public async getAboutPageAsync(): Promise<AboutPageVM> {
     const query = qs.stringify(
       {
-        populate: [...this._defaultSeoPopulate, 'educationSections', 'workSections.projects'],
+        populate: [
+          ...this._defaultSeoPopulate,
+          'educationSections',
+          'workSections.projects',
+        ],
       },
       {
         encodeValuesOnly: true,
       }
     );
-    const res = await this.getAsync<AboutPageVM>(StrapiEndpoint.AboutPage, query);
+    const res = await this.getAsync<AboutPageVM>(
+      StrapiEndpoint.AboutPage,
+      query
+    );
 
     return res.data;
   }
 
   public async getBlogPageAsync(): Promise<BlogPageVM> {
-    const res = await this.getAsync<BlogPageVM>(StrapiEndpoint.BlogPage, this._defaultPageQuery);
+    const res = await this.getAsync<BlogPageVM>(
+      StrapiEndpoint.BlogPage,
+      this._defaultPageQuery
+    );
 
     return res.data;
   }
 
   public async getContactPageAsync(): Promise<ContactPageVM> {
-    const res = await this.getAsync<ContactPageVM>(StrapiEndpoint.ContactPage, this._defaultPageQuery);
+    const res = await this.getAsync<ContactPageVM>(
+      StrapiEndpoint.ContactPage,
+      this._defaultPageQuery
+    );
 
     return res.data;
   }
@@ -145,73 +164,73 @@ class StrapiClient {
   /*** OTHER ***/
   public async getSitemap(): Promise<string> {
     const url = `${this._baseUrl}/api/${StrapiEndpoint.Sitemap}`;
-    const headers = this._baseHeaders
-    const res = await fetch(
-      url,
-      {
-        method: "GET",
-        headers,
-      }
-    );
+    const headers = this._baseHeaders;
+    const res = await fetch(url, {
+      method: 'GET',
+      headers,
+    });
     return await res.text();
   }
 
   /*** HELPER FUNCTIONS ***/
-  private async getAsync<T>(endpoint: StrapiEndpoint, query: string, additionalHeaders?: StrapiHeaders): Promise<StrapiResponse<T>> {
+  private async getAsync<T>(
+    endpoint: StrapiEndpoint,
+    query: string,
+    additionalHeaders?: StrapiHeaders
+  ): Promise<StrapiResponse<T>> {
     const url = `${this._baseUrl}/api/${endpoint}?${query}`;
     const headers = {
       ...this._baseHeaders,
       ...additionalHeaders,
     };
 
-    const res = await fetch(
-      url,
-      {
-        method: "GET",
-        headers,
-        next: {
-          revalidate: 120,
-        }
-      }
-    );
+    const res = await fetch(url, {
+      method: 'GET',
+      headers,
+      next: {
+        revalidate: 120,
+      },
+    });
     return await res.json();
   }
 
-  private async postJSONAsync(path: string, body: any, additionalHeaders?: StrapiHeaders) {
+  private async postJSONAsync(
+    path: string,
+    body: any,
+    additionalHeaders?: StrapiHeaders
+  ) {
     const url = `${this._baseUrl}/api/${path}`;
     const headers = {
       ...this._baseHeaders,
       'Content-Type': 'application/json',
-      ...additionalHeaders
-    }
+      ...additionalHeaders,
+    };
 
-    const res = await fetch(
-      url,
-      {
-        method: "POST",
-        headers,
-        body
-      },
-    );
+    const res = await fetch(url, {
+      method: 'POST',
+      headers,
+      body,
+    });
     return await res.json();
   }
 
-  private async postFormDataAsync(path: string, body: any, additionalHeaders?: StrapiHeaders) {
+  private async postFormDataAsync(
+    path: string,
+    body: any,
+    additionalHeaders?: StrapiHeaders
+  ) {
     const url = `${this._baseUrl}/api/${path}`;
     const headers = {
       ...this._baseHeaders,
       'Content-Type': 'multipart/form-data',
-      ...additionalHeaders
-    }
+      ...additionalHeaders,
+    };
 
-    const res = await fetch(
-      url,
-      {
-        method: "POST",
-        headers,
-        body
-      }
-    );
+    const res = await fetch(url, {
+      method: 'POST',
+      headers,
+      body,
+    });
     return await res.json();
   }
 }

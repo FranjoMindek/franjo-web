@@ -1,7 +1,7 @@
-import StrapiSeo from "@/lib/strapi/models/StrapiSeo";
+import StrapiSeo from '@/lib/strapi/models/StrapiSeo';
 
 type ContactPageVM = {
-  seo: StrapiSeo,
-}
+  seo: StrapiSeo;
+};
 
 export default ContactPageVM;

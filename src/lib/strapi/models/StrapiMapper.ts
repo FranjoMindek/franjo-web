@@ -1,5 +1,5 @@
-import StrapiSeo from "./StrapiSeo";
-import { Metadata } from "next";
+import StrapiSeo from './StrapiSeo';
+import { Metadata } from 'next';
 
 // disallow instantiating
 abstract class StrapiMapper {
@@ -9,13 +9,13 @@ abstract class StrapiMapper {
       title: seo.metaTitle,
       description: seo.metaDescription,
       alternates: {
-        canonical: seo.canonicalURL
+        canonical: seo.canonicalURL,
       },
       keywords: seo.keywords,
       robots: {
         index: !seo.metaRobots?.includes('noindex'),
         follow: !seo.metaRobots?.includes('nofollow'),
-      }
+      },
     };
   }
 }

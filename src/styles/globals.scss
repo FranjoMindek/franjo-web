@@ -5,12 +5,12 @@
 
 @layer components {
   .page-container {
-    @apply w-full flex flex-col justify-center items-center px-4 py-8 md:px-12 lg:px-20 flex-grow
-    sm:bg-gradient-to-r from-cappuccino from-0% to-offwhite to-5%;
+    @apply flex w-full flex-grow flex-col items-center justify-center from-cappuccino from-0% to-offwhite to-5%
+    px-4 py-8 sm:bg-gradient-to-r md:px-12 lg:px-20;
   }
 
   .form-input-container {
-    @apply flex flex-col w-full;
+    @apply flex w-full flex-col;
 
     label {
       @apply ml-2;
@@ -25,41 +25,40 @@
     }
 
     blockquote {
-      @apply text-center p-4 sm:p-6 text-base sm:text-xl font-semibold;
+      @apply p-4 text-center text-base font-semibold sm:p-6 sm:text-xl;
 
       > p::before {
-        content: "„";
+        content: '„';
       }
 
       > p::after {
-        content: "“";
+        content: '“';
       }
     }
 
     ul {
-      @apply pl-8 list-disc;
+      @apply list-disc pl-8;
     }
 
     h1 {
-      @apply text-5xl sm:text-6xl font-bold mt-10;
+      @apply mt-10 text-5xl font-bold sm:text-6xl;
     }
 
     h2 {
-      @apply text-4xl sm:text-5xl font-semibold mt-8;
+      @apply mt-8 text-4xl font-semibold sm:text-5xl;
     }
 
     h3 {
-      @apply text-3xl sm:text-4xl font-semibold mt-6;
+      @apply mt-6 text-3xl font-semibold sm:text-4xl;
     }
 
     h4 {
-      @apply text-2xl sm:text-3xl font-semibold mt-4;
+      @apply mt-4 text-2xl font-semibold sm:text-3xl;
     }
 
     h5 {
-      @apply text-xl sm:text-2xl font-semibold mt-2;
+      @apply mt-2 text-xl font-semibold sm:text-2xl;
     }
-
   }
 }
 
@@ -69,8 +68,9 @@
 //  background-clip: content-box, padding-box;
 //}
 
-input, textarea {
-  @apply border-2 border-cappuccino rounded-xl py-2 px-2;
+input,
+textarea {
+  @apply rounded-xl border-2 border-cappuccino px-2 py-2;
 
   &::placeholder {
     @apply italic text-coffee text-opacity-50;

@@ -1,10 +1,10 @@
 declare type SVGComponent = React.FC<React.SVGProps<SVGSVGElement>>;
 declare type SVGData = {
-  blurHeight: number,
-    blurWidth: number,
-    height: number,
-    width: number,
-    src: string,
+  blurHeight: number;
+  blurWidth: number;
+  height: number;
+  width: number;
+  src: string;
 };
 
 declare module '*.svg' {
@@ -13,6 +13,6 @@ declare module '*.svg' {
 }
 
 declare module '*.svg?url' {
-  const svgData: SVGData
+  const svgData: SVGData;
   export default svgData;
 }

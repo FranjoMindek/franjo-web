@@ -1,7 +1,7 @@
-import StrapiSeo from "@/lib/strapi/models/StrapiSeo";
+import StrapiSeo from '@/lib/strapi/models/StrapiSeo';
 
 type BlogPageVM = {
-  seo: StrapiSeo,
-}
+  seo: StrapiSeo;
+};
 
 export default BlogPageVM;
