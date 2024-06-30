@@ -39,6 +39,6 @@
     "typescript": "5.5.2"
   },
   "engines": {
-    "node": "22.x.x"
+    "node": "20.x.x"
   }
 }
