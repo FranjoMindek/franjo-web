@@ -6,5 +6,6 @@
   "endOfLine": "lf",
   "semi": true,
   "arrowParens": "avoid",
-  "jsxSingleQuote": true
+  "jsxSingleQuote": true,
+  "printWidth": 80
 }

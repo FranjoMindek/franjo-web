@@ -1,15 +1,22 @@
 import socialMedias from '@/constants/social-medias';
 import Link from 'next/link';
+import React from 'react';
+import { twJoin } from 'tailwind-merge';
 
 type Props = {
   direction?: 'row' | 'col';
 };
 
-const SocialMedia = ({ direction = 'row' }: Props) => {
+function SocialMedia({ direction = 'row' }: Props) {
   const flexDirection = `flex-${direction}`;
 
   return (
-    <div className={`flex ${flexDirection} items-center justify-center gap-2`}>
+    <div
+      className={twJoin(
+        'flex items-center justify-center gap-2',
+        direction === 'col' && 'flex-col'
+      )}
+    >
       {socialMedias.length &&
         socialMedias.map(sm => (
           <Link
@@ -27,6 +34,6 @@ const SocialMedia = ({ direction = 'row' }: Props) => {
         ))}
     </div>
   );
-};
+}
 
-export default SocialMedia;
+export default React.memo(SocialMedia);

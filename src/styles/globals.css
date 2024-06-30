@@ -1,12 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import 'variables';
+
+@layer utilities {
+  .min-h-screen {
+    min-height: 100vh; /* Fallback */
+    min-height: 100dvh;
+  }
+  .h-screen {
+    height: 100vh; /* Fallback */
+    height: 100dvh;
+  }
+}
 
 @layer components {
   .page-container {
     @apply flex w-full flex-grow flex-col items-center justify-center from-cappuccino from-0% to-offwhite to-5%
-    px-4 py-8 sm:py-20 sm:bg-gradient-to-r md:px-12 lg:px-20;
+    px-4 py-8 sm:bg-gradient-to-r sm:py-20 md:px-12 lg:px-20;
   }
 
   .form-input-container {
@@ -59,20 +69,5 @@
     h5 {
       @apply mt-2 text-xl font-semibold sm:text-2xl;
     }
-  }
-}
-
-//Color all paddings for development
-//* {
-//  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%), linear-gradient(to bottom, rgba(220, 210, 180, 1) 0%, rgba(220, 210, 180, 1) 100%);
-//  background-clip: content-box, padding-box;
-//}
-
-input,
-textarea {
-  @apply rounded-xl border-2 border-cappuccino px-2 py-2;
-
-  &::placeholder {
-    @apply italic text-coffee text-opacity-50;
   }
 }

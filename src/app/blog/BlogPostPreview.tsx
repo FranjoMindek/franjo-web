@@ -1,12 +1,13 @@
 import BlogPostPreviewVM from '@/models/BlogPostPreviewVM';
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 
 type Props = {
   preview: BlogPostPreviewVM;
 };
 
-export default function BlogPostPreview({ preview }: Props) {
+function BlogPostPreview({ preview }: Props) {
   return (
     <Link
       href={`blog/${preview.slug}`}
@@ -24,3 +25,5 @@ export default function BlogPostPreview({ preview }: Props) {
     </Link>
   );
 }
+
+export default React.memo(BlogPostPreview);

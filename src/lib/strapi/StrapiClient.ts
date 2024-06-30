@@ -2,9 +2,7 @@
 
 import qs from 'qs';
 import StrapiResponse from '@/lib/strapi/models/StrapiResponse';
-import AboutPageVM from '@/models/AboutPageVM';
 import HomePageVM from '@/models/HomePageVM';
-import ContactPageVM from '@/models/ContactPageVM';
 import BlogPageVM from '@/models/BlogPageVM';
 import StrapiEndpoint from '@/lib/strapi/strapi-endpoint';
 import BlogPostPreviewVM from '@/models/BlogPostPreviewVM';
@@ -122,39 +120,9 @@ class StrapiClient {
     return res.data;
   }
 
-  public async getAboutPageAsync(): Promise<AboutPageVM> {
-    const query = qs.stringify(
-      {
-        populate: [
-          ...this._defaultSeoPopulate,
-          'educationSections',
-          'workSections.projects',
-        ],
-      },
-      {
-        encodeValuesOnly: true,
-      }
-    );
-    const res = await this.getAsync<AboutPageVM>(
-      StrapiEndpoint.AboutPage,
-      query
-    );
-
-    return res.data;
-  }
-
   public async getBlogPageAsync(): Promise<BlogPageVM> {
     const res = await this.getAsync<BlogPageVM>(
       StrapiEndpoint.BlogPage,
-      this._defaultPageQuery
-    );
-
-    return res.data;
-  }
-
-  public async getContactPageAsync(): Promise<ContactPageVM> {
-    const res = await this.getAsync<ContactPageVM>(
-      StrapiEndpoint.ContactPage,
       this._defaultPageQuery
     );
 

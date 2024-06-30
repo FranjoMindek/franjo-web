@@ -1,10 +1,9 @@
 import StrapiClient from '@/lib/strapi/StrapiClient';
 import StrapiMapper from '@/lib/strapi/models/StrapiMapper';
+import HomePageVM from '@/models/HomePageVM';
 import markdownIt from 'markdown-it';
 import highlightjs from 'markdown-it-highlightjs';
 import { notFound } from 'next/navigation';
-import AboutPageVM from '@/models/AboutPageVM';
-import HomePageVM from '@/models/HomePageVM';
 
 export default async function Home() {
   const md = markdownIt().use(highlightjs); // keep this serverside

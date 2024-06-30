@@ -1,10 +1,12 @@
 import StrapiClient from '@/lib/strapi/StrapiClient';
 import StrapiMapper from '@/lib/strapi/models/StrapiMapper';
-import { notFound } from 'next/navigation';
+import { toLocalDate } from '@/utils/date';
+import Back from '@img/back.svg';
 import markdownIt from 'markdown-it';
 import highlightjs from 'markdown-it-highlightjs';
 import Image from 'next/image';
-import { toLocalDate } from '@/utils/date-utils';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 type Props = {
   params: {
@@ -19,6 +21,10 @@ export default async function BlogPost({ params }: Props) {
   return (
     <div className='page-container justify-start'>
       <div className='flex w-full max-w-prose flex-col'>
+        <Link className='mb-12 flex flex-row items-center gap-2' href='/blog'>
+          <Back />
+          Return to blog
+        </Link>
         <h1 className='mb-12 text-5xl font-bold sm:mb-16 sm:text-6xl'>
           {data.title}
         </h1>
