@@ -42,7 +42,7 @@ function Navigation() {
       <aside
         className={twJoin(
           'sticky left-0 top-0 flex max-h-screen shrink-0 basis-[max(310px,25%)] flex-col items-center bg-cappuccino p-8 py-12 max-lg:fixed max-lg:h-screen max-lg:w-screen',
-          isOpen && 'max-lg:hidden'
+          !isOpen && 'max-lg:hidden'
         )}
       >
         {/* Logo */}
