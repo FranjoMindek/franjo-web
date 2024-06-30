@@ -1,12 +1,12 @@
 'use server';
 
-import qs from 'qs';
 import StrapiResponse from '@/lib/strapi/models/StrapiResponse';
-import HomePageVM from '@/models/HomePageVM';
-import BlogPageVM from '@/models/BlogPageVM';
 import StrapiEndpoint from '@/lib/strapi/strapi-endpoint';
+import BlogPageVM from '@/models/BlogPageVM';
 import BlogPostPreviewVM from '@/models/BlogPostPreviewVM';
 import BlogPostVM from '@/models/BlogPostVM';
+import HomePageVM from '@/models/HomePageVM';
+import qs from 'qs';
 
 type StrapiHeaders = Record<string, string>;
 
@@ -161,46 +161,45 @@ class StrapiClient {
     });
     return await res.json();
   }
+  // private async postJSONAsync(
+  //   path: string,
+  //   body: any,
+  //   additionalHeaders?: StrapiHeaders
+  // ) {
+  //   const url = `${this._baseUrl}/api/${path}`;
+  //   const headers = {
+  //     ...this._baseHeaders,
+  //     'Content-Type': 'application/json',
+  //     ...additionalHeaders,
+  //   };
 
-  private async postJSONAsync(
-    path: string,
-    body: any,
-    additionalHeaders?: StrapiHeaders
-  ) {
-    const url = `${this._baseUrl}/api/${path}`;
-    const headers = {
-      ...this._baseHeaders,
-      'Content-Type': 'application/json',
-      ...additionalHeaders,
-    };
+  //   const res = await fetch(url, {
+  //     method: 'POST',
+  //     headers,
+  //     body,
+  //   });
+  //   return await res.json();
+  // }
 
-    const res = await fetch(url, {
-      method: 'POST',
-      headers,
-      body,
-    });
-    return await res.json();
-  }
+  // private async postFormDataAsync(
+  //   path: string,
+  //   body: any,
+  //   additionalHeaders?: StrapiHeaders
+  // ) {
+  //   const url = `${this._baseUrl}/api/${path}`;
+  //   const headers = {
+  //     ...this._baseHeaders,
+  //     'Content-Type': 'multipart/form-data',
+  //     ...additionalHeaders,
+  //   };
 
-  private async postFormDataAsync(
-    path: string,
-    body: any,
-    additionalHeaders?: StrapiHeaders
-  ) {
-    const url = `${this._baseUrl}/api/${path}`;
-    const headers = {
-      ...this._baseHeaders,
-      'Content-Type': 'multipart/form-data',
-      ...additionalHeaders,
-    };
-
-    const res = await fetch(url, {
-      method: 'POST',
-      headers,
-      body,
-    });
-    return await res.json();
-  }
+  //   const res = await fetch(url, {
+  //     method: 'POST',
+  //     headers,
+  //     body,
+  //   });
+  //   return await res.json();
+  // }
 }
 
 export default StrapiClient;
